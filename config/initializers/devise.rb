@@ -6,7 +6,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` on Rails 4+ applications as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'a909aaba0e8c1786bd49b88d42573e8512adbc4d2d569e1ac3284b444d822360ea26416cbcd3cac139ccddc4fbfaab1325a1cdb5d8184810c770ac614c6b82d3'
+  # config.secret_key = 'e359f41cd2ec8a97b3f44d407ffb1a7d858e550fe92a6e1692c87c04b12cc4378eb43579228066b6e6f6b3a4183ed4bdf18499480dc9c09863857e0bdbc61c0e'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -99,7 +99,10 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = '4366b8a85bc79546fabb846673694ae2e86e67ad2380591b19dc8e9624b86d598d2626ad6220599afa44e6bf3bd5f230d465de277272ae436991b02003b9b83e'
+  # config.pepper = 'a27a655cc54bfae2bb222f1b7193a24d7a8b10e86259f969b5a8c72acb04a34bb2c50c8ade12441a05541b99535d3eb4214a04c5d78ef6eb88e36df73aaf4df7'
+
+  # Send a notification email when the user's password is changed
+  # config.send_password_change_notification = false
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -158,7 +161,7 @@ Devise.setup do |config|
   # Defines which strategy will be used to lock an account.
   # :failed_attempts = Locks an account after a number of failed attempts to sign in.
   # :none            = No lock strategy. You should handle locking by yourself.
-  # config.lock_strategy = :failed_attempts
+   config.lock_strategy = :failed_attempts
 
   # Defines which key will be used when locking and unlocking an account
   # config.unlock_keys = [:email]
@@ -208,7 +211,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  # config.scoped_views = false
+   config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
@@ -259,4 +262,6 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+  config.omniauth :facebook, "1003419973033345", "262280e84b0686114249480892c08632"
+  config.omniauth :google_oauth2, "1017950952544-m6m7po0krsokm4a1j4ltr5tr9ohdpph5.apps.googleusercontent.com", "EfUBzpUKFcdmHOI5yQzRCi15" , {}
 end
