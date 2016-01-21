@@ -3,6 +3,9 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
+  <strong>Name:</strong> <%= current_user.name %><br>
+<strong>Image:</strong> <img src= <%= current_user.image %>>
+
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
