@@ -31,11 +31,11 @@ That's it. Now you have basic setup ready to contribute.
 If you are getting merge conflict in files like "schema.rb" or "Gemfile.lock" then this will work : 
 ```sh
 # For resolving schema.rb conflict
-git checkout --HEAD schema.rb
+git checkout HEAD schema.rb
 rake db:migrate
 
 # For resolving Gemfile.lock conflicts
-git checkout --HEAD Gemfile.lock
+git checkout HEAD Gemfile.lock
 bundle install 
 ```
 
