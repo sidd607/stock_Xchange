@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :transaction       
   devise_for :users
   get 'profile' => 'profile#index'
   # The priority is based upon order of creation: first created -> highest priority.
