@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+   get 'stocks/show_info'
+  #resources :stocks
+  #get "stocks" => 'stocks#show_info'
+  resources :stocks
   devise_for :users
   get 'profile' => 'profile#index'
   # The priority is based upon order of creation: first created -> highest priority.
