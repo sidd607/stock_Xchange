@@ -3,7 +3,7 @@ class StocksController < ApplicationController
   def index
   end
 
-  def show_info
+  def new_stock
     @stock = Stock.new
   end
 
