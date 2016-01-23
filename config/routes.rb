@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-   get 'stocks/show_info'
+   get 'stocks/new_stock'
   #resources :stocks
   #get "stocks" => 'stocks#show_info'
   resources :stocks
