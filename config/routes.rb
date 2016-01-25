@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :transaction
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
-   get 'stocks/show_info'
+  get 'stocks/new_stock'
   #resources :stocks
   #get "stocks" => 'stocks#show_info'
   resources :stocks
