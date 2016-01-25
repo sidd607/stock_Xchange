@@ -1,0 +1,48 @@
+<h1>Showing stocks informations</h1>
+<%= form_for @stock do |f| %>
+    <p>
+    <%= f.label :code %><br>
+    <%= f.number_field :code %>
+    </p>
+
+    <p>
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </p>
+
+    <p>
+      <%= f.label :stock_type %><br>
+      <%= f.number_field :stock_type %>
+
+    </p>
+    <p>
+      <%= f.label :current_price %><br>
+      <%= f.number_field :current_price %>
+    </p>
+
+    <p>
+      <%= f.label :opening_price %><br>
+      <%= f.number_field :opening_price %>
+    </p>
+
+    <p>
+      <%= f.label :day_high %><br>
+      <%= f.number_field :day_high %>
+    </p>
+
+    <p>
+      <%= f.label :day_low %><br>
+      <%= f.number_field :day_low %>
+    </p>
+
+    <p>
+      <%= f.label :sold_count %><br>
+      <%= f.number_field :sold_count %>
+    </p>
+
+
+
+      <p>
+      <%= f.submit %>
+    </p>
+<% end %>
