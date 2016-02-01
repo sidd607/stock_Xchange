@@ -33,6 +33,12 @@ class PortfoliosController < ApplicationController
     @portfolio.user_id = current_user.id
     @stock = Stock.find(params[:portfolio][:stock_id])
     @portfolio.stock_value = @stock.current_price
+    @transaction = Transaction.new(portfolio_params)
+    @transaction.portfolio_id = BUY   #portfolio_id is for selling transactions as we need the parent transaction
+    @transaction.transaction_type = BUY
+    @transaction.stock_value = @stock.current_price
+    @transaction.user_id = current_user.id
+    @transaction.save
     respond_to do |format|
       if @portfolio.save
         format.html { redirect_to @portfolio, notice: 'Portfolio was successfully created.' }
@@ -42,6 +48,7 @@ class PortfoliosController < ApplicationController
         format.json { render json: @portfolio.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /portfolios/1
@@ -70,6 +77,13 @@ class PortfoliosController < ApplicationController
 
   def sell_post
       @portfolio = Portfolio.find(params[:id])
+      @stock = Stock.find(@portfolio.stock_id)
+      @transaction = Transaction.new(portfolio_params)
+      @transaction.portfolio_id = @portfolio.id   #portfolio_id is for selling transactions as we need the parent transaction
+      @transaction.transaction_type = SELL
+      @transaction.stock_value = @stock.current_price
+      @transaction.user_id = current_user.id
+      @transaction.save
       @updatecount = params[:portfolio][:stock_count].to_i
     #   render text: @portfolio.stock_count.class
     #   return
