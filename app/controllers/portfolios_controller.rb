@@ -1,10 +1,11 @@
 class PortfoliosController < ApplicationController
   before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
+  before_action :getUserPortfolios, only: [:show, :edit, :update, :destroy]
   # GET /portfolios
   # GET /portfolios.json
   def index
-    @portfolios = Portfolio.all
+    @portfolios = current_user.portfolios
   end
 
   # GET /portfolios/1
@@ -67,10 +68,6 @@ class PortfoliosController < ApplicationController
     end
   end
 
-  def sell
-      @portfolio = Portfolio.find(params[:id])
-  end
-
   def sell_post
       @portfolio = Portfolio.find(params[:id])
       @updatecount = params[:portfolio][:stock_count].to_i
@@ -96,5 +93,11 @@ class PortfoliosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def portfolio_params
       params.require(:portfolio).permit(:stock_id, :stock_count)
+    end
+
+    def getUserPortfolios
+        unless current_user.portfolios.include? @portfolio
+            render json: nil, status: :ok
+        end
     end
 end
