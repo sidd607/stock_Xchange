@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122090950) do
+ActiveRecord::Schema.define(version: 20160208135602) do
 
   create_table "colleges", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -69,6 +69,8 @@ ActiveRecord::Schema.define(version: 20160122090950) do
     t.string   "uid",                    limit: 255
     t.string   "name",                   limit: 255
     t.string   "image",                  limit: 255
+    t.float    "net_worth",              limit: 24
+    t.float    "balance",                limit: 24
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
