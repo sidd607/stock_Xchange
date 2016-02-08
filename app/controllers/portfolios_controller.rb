@@ -1,10 +1,11 @@
 class PortfoliosController < ApplicationController
   before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
+  before_action :getUserPortfolios, only: [:show, :edit, :update, :destroy]
   # GET /portfolios
   # GET /portfolios.json
   def index
-    @portfolios = Portfolio.all
+    @portfolios = current_user.portfolios
   end
 
   # GET /portfolios/1
@@ -32,6 +33,12 @@ class PortfoliosController < ApplicationController
     @portfolio.user_id = current_user.id
     @stock = Stock.find(params[:portfolio][:stock_id])
     @portfolio.stock_value = @stock.current_price
+    @transaction = Transaction.new(portfolio_params)
+    @transaction.portfolio_id = BUY   #portfolio_id is for selling transactions as we need the parent transaction
+    @transaction.transaction_type = BUY
+    @transaction.stock_value = @stock.current_price
+    @transaction.user_id = current_user.id
+    @transaction.save
     respond_to do |format|
       if @portfolio.save
         format.html { redirect_to @portfolio, notice: 'Portfolio was successfully created.' }
@@ -41,6 +48,7 @@ class PortfoliosController < ApplicationController
         format.json { render json: @portfolio.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /portfolios/1
@@ -67,12 +75,15 @@ class PortfoliosController < ApplicationController
     end
   end
 
-  def sell
-      @portfolio = Portfolio.find(params[:id])
-  end
-
   def sell_post
       @portfolio = Portfolio.find(params[:id])
+      @stock = Stock.find(@portfolio.stock_id)
+      @transaction = Transaction.new(portfolio_params)
+      @transaction.portfolio_id = @portfolio.id   #portfolio_id is for selling transactions as we need the parent transaction
+      @transaction.transaction_type = SELL
+      @transaction.stock_value = @stock.current_price
+      @transaction.user_id = current_user.id
+      @transaction.save
       @updatecount = params[:portfolio][:stock_count].to_i
     #   render text: @portfolio.stock_count.class
     #   return
@@ -96,5 +107,11 @@ class PortfoliosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def portfolio_params
       params.require(:portfolio).permit(:stock_id, :stock_count)
+    end
+
+    def getUserPortfolios
+        unless current_user.portfolios.include? @portfolio
+            render json: nil, status: :ok
+        end
     end
 end

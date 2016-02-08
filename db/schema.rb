@@ -20,12 +20,12 @@ ActiveRecord::Schema.define(version: 20160208135602) do
   end
 
   create_table "portfolios", force: :cascade do |t|
-    t.integer  "user_id",     limit: 4
     t.integer  "stock_id",    limit: 4
     t.integer  "stock_value", limit: 4
     t.integer  "stock_count", limit: 4
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.integer  "user_id",     limit: 4
   end
 
   create_table "stocks", force: :cascade do |t|
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20160208135602) do
     t.integer  "transaction_type", limit: 2,  null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
-    t.integer  "buy_id",           limit: 4
+    t.integer  "portfolio_id",     limit: 4
   end
 
   create_table "users", force: :cascade do |t|
