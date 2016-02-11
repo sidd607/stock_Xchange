@@ -77,6 +77,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:stock_id, :stock_count, :portfolio_id)
+      params.require(:transaction).permit(:stock_id, :stock_count, :user_stock_id)
     end
 end

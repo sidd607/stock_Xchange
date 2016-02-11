@@ -3,21 +3,21 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-     :omniauthable, :omniauth_providers => [:facebook,:google_oauth2]
+         :omniauthable, :omniauth_providers => [:facebook,:google_oauth2]
 
-     validates_presence_of :name
-     belongs_to :college
-     has_many :transactions
-     has_many :portfolios
+  validates_presence_of :name
+  belongs_to :college
+  has_many :transactions
+  has_many :user_stocks
 
- def self.from_omniauth(auth)
-      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-        user.provider = auth.provider
-        user.name = auth.info.name
-        user.image = auth.info.image
-        user.uid = auth.uid
-        user.email = auth.info.email
-        user.password = Devise.friendly_token[0,20]
-      end
- end
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.provider = auth.provider
+      user.name = auth.info.name
+      user.image = auth.info.image
+      user.uid = auth.uid
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+    end
+  end
 end
