@@ -9,9 +9,28 @@ Rails.application.routes.draw do
   #get "stocks" => 'stocks#show_info'
   resources :stocks
   get 'profile' => 'profile#index'
+  resources :comments
+  resources :posts
+  ActiveAdmin.routes(self)
+   devise_for :users, :controllers => {:registrations => 'registrations', :omniauth_callbacks =>  "callbacks"}
   root to: 'static_pages#home'
+  resources :authorizations
+  get "/authorizations", to: "authorizations#index", as: "index"
+  get "/posts", to: "posts#index", as: "blog"
+  get "/admin", to: "admin/dashboard#index", as: "admin"
+
+  devise_scope :user do
+      get "social", to: "devise/registrations#social"
+  end
+  
+  resources :posts do
+  resources :comments
+end
   get 'static_pages/help'
+
   get 'static_pages/about'
+  #Add the following line
+ #post '/auth/:provider/callback' => 'authentications#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
