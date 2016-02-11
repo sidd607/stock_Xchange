@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
+  resources :portfolios do
+      patch 'sell' => 'portfolios#sell_post', on: :member
+  end
+  resources :transactions
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
+  get 'stocks/new_stock'
+  #resources :stocks
+  #get "stocks" => 'stocks#show_info'
+  resources :stocks
+  get 'profile' => 'profile#index'
   root to: 'static_pages#home'
   get 'static_pages/help'
   get 'static_pages/about'

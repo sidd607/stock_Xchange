@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @portfolio.user_id %>
+</p>
+
+<p>
+  <strong>Stock:</strong>
+  <%= @portfolio.stock_id %>
+</p>
+
+<p>
+  <strong>Stock count:</strong>
+  <%= @portfolio.stock_count %>
+</p>
+
+<%= form_for(@portfolio, url: sell_portfolio_path) do |f| %>
+  <% if @portfolio.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@portfolio.errors.count, "error") %> prohibited this portfolio from being saved:</h2>
+
+      <ul>
+      <% @portfolio.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= f.label :stock_count %><br>
+    <%= f.number_field :stock_count, value: "" %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Edit', edit_portfolio_path(@portfolio) %> |
+<%= link_to 'Back', portfolios_path %>
