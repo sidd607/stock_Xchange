@@ -52,6 +52,6 @@ But it is better to remove activeadmin for now, because it can be added at the v
 
 ```sh
 rails destroy active_admin:install
-rails destroy active_admin:resource product # type this command if you put some other migration to active admin
+rails destroy active_admin:resource specific_table_name # type this command if you put some other migration to active admin
 ```
 
