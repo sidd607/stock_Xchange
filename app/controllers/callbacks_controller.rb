@@ -1,5 +1,6 @@
 class CallbacksController < Devise::OmniauthCallbacksController
   skip_before_filter :authenticate_user!
+
   def all
     omniauth = request.env["omniauth.auth"]
     authorization = Authorization.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
@@ -39,8 +40,3 @@ class CallbacksController < Devise::OmniauthCallbacksController
   alias_method :facebook, :all
   alias_method :google_oauth2, :all
 end
-
-
-
-
-
