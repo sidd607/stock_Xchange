@@ -6,6 +6,13 @@ gem 'rails', '4.2.5'
 # Use sqlite3 as the database for Active Record
 gem 'bootstrap-sass',       '3.2.0.0'
 gem 'mysql2', '>= 0.3.13', '< 0.5'
+gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'jquery-ui-rails', '~> 4.2.1'
+gem 'angularjs-rails'
+gem 'angular-ui-bootstrap-rails' #for bootstrap UI
+gem "font-awesome-rails"
+gem 'bower-rails'
+gem 'angular-rails-templates'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
