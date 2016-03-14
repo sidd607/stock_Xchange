@@ -263,5 +263,5 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
   config.omniauth :facebook, "1003419973033345", "262280e84b0686114249480892c08632"
-  config.omniauth :google_oauth2, "1017950952544-m6m7po0krsokm4a1j4ltr5tr9ohdpph5.apps.googleusercontent.com", "EfUBzpUKFcdmHOI5yQzRCi15" , {}
+  config.omniauth :google_oauth2, "1017950952544-m6m7po0krsokm4a1j4ltr5tr9ohdpph5.apps.googleusercontent.com", "EfUBzpUKFcdmHOI5yQzRCi15" , skip_jwt: true
 end

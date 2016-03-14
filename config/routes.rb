@@ -3,8 +3,7 @@ Rails.application.routes.draw do
       patch 'sell' => 'portfolios#sell_post', on: :member
   end
   resources :transactions
-  devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
-  get 'stocks/new_stock'
+   get 'stocks/new_stock'
   #resources :stocks
   #get "stocks" => 'stocks#show_info'
   resources :stocks

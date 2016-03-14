@@ -3,7 +3,7 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "edit_user_form"}) do |f| %>
   <%= devise_error_messages! %>
  
- <strong>Name:</strong> <%= current_user.username %><br>
+ <strong>Name:</strong> <%= current_user.name %><br>
 <strong>Image:</strong> <img src= <%= current_user.image %>>
  <strong>Gender:</strong> <%= current_user.is_female %><br>
 

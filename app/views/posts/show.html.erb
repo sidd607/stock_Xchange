@@ -1,19 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @post.name %>
-</p>
 
-<p>
-  <b>Title:</b>
-  <%= @post.title %>
-</p>
+      
+        <span class="user"><b>Name : </b><%= @post.user.name %></span> <br>
+  <span class=" title"><b>Title :  </b><%= @post.title %></span> <br>
+  <span class="content"><b>Content : </b><%= @post.content %></span> <br>
+  <span class="timestamp">
+    <b>Posted</b> <%= time_ago_in_words(@post.created_at) %> ago.
+  </span>
+<br>
 
-<p>
-  <b>Content:</b>
-  <%= @post.content %>
-</p>
+
+      
+        
+
+
+
+
+  
+
 
 <!-- /posts/:post_id/comments/ -->
 <%= link_to 'Comments', post_comments_path(@post) %> |
