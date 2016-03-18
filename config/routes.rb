@@ -12,12 +12,14 @@ Rails.application.routes.draw do
   resources :comments
   resources :posts
    devise_for :users, :controllers => {:registrations => 'registrations', :omniauth_callbacks =>  "callbacks"}
-  root to: 'static_pages#home'
+   root 'static_pages#home'
+    get '*path' => 'static_pages#home'
+  
   resources :authorizations
   get "/authorizations", to: "authorizations#index", as: "index"
   get "/posts", to: "posts#index", as: "blog"
   get "/admin", to: "admin/dashboard#index", as: "admin"
-
+  get "main/index"
   devise_scope :user do
       get "social", to: "devise/registrations#social"
   end

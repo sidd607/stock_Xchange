@@ -8,11 +8,13 @@ gem 'bootstrap-sass',       '3.2.0.0'
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'jquery-ui-rails', '~> 4.2.1'
+gem 'bower-rails'
 gem 'angularjs-rails'
 gem 'angular-ui-bootstrap-rails' #for bootstrap UI
 gem "font-awesome-rails"
 gem 'bower-rails'
 gem 'angular-rails-templates'
+gem 'sprockets', '2.12.3'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
