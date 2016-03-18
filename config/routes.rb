@@ -4,13 +4,13 @@ Rails.application.routes.draw do
   # end
   resources :transactions
    get 'stocks/new_stock'
+
   #resources :stocks
   #get "stocks" => 'stocks#show_info'
   resources :stocks
   get 'profile' => 'profile#index'
   resources :comments
   resources :posts
-  ActiveAdmin.routes(self)
    devise_for :users, :controllers => {:registrations => 'registrations', :omniauth_callbacks =>  "callbacks"}
   root to: 'static_pages#home'
   resources :authorizations
