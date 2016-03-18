@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   #     patch 'sell' => 'portfolios#sell_post', on: :member
   # end
   resources :transactions
-  devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
   get 'stocks/new_stock'
   #resources :stocks
   #get "stocks" => 'stocks#show_info'
@@ -11,7 +10,6 @@ Rails.application.routes.draw do
   get 'profile' => 'profile#index'
   resources :comments
   resources :posts
-  ActiveAdmin.routes(self)
    devise_for :users, :controllers => {:registrations => 'registrations', :omniauth_callbacks =>  "callbacks"}
   root to: 'static_pages#home'
   resources :authorizations
