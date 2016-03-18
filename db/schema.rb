@@ -11,8 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+ActiveRecord::Schema.define(version: 20160211220758) do
 
-ActiveRecord::Schema.define(version: 20160208135602) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
     t.text     "body",          limit: 65535
@@ -44,16 +44,6 @@ ActiveRecord::Schema.define(version: 20160208135602) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "authentications", force: :cascade do |t|
-    t.string   "provider",   limit: 255
-    t.string   "uid",        limit: 255
-    t.integer  "user_id",    limit: 4
-    t.string   "token",      limit: 255
-    t.string   "secret",     limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider",   limit: 255
     t.string   "uid",        limit: 255
@@ -64,22 +54,12 @@ ActiveRecord::Schema.define(version: 20160208135602) do
     t.datetime "updated_at",             null: false
   end
 
-
   create_table "colleges", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
-
-  create_table "portfolios", force: :cascade do |t|
-    t.integer  "stock_id",    limit: 4
-    t.integer  "stock_value", limit: 4
-    t.integer  "stock_count", limit: 4
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.integer  "user_id",     limit: 4
-end
   create_table "comments", force: :cascade do |t|
     t.string   "commenter",  limit: 255
     t.text     "body",       limit: 65535
@@ -96,7 +76,6 @@ end
     t.text     "content",    limit: 65535
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
-
   end
 
   create_table "stocks", force: :cascade do |t|
@@ -121,6 +100,16 @@ end
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "portfolio_id",     limit: 4
+    t.integer  "user_stock_id",    limit: 4
+  end
+
+  create_table "user_stocks", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "stock_id",    limit: 4
+    t.integer  "stock_value", limit: 4
+    t.integer  "stock_count", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -140,15 +129,14 @@ end
     t.string   "uid",                    limit: 255
     t.string   "name",                   limit: 255
     t.string   "image",                  limit: 255
-    t.float    "net_worth",              limit: 24
-    t.float    "balance",                limit: 24
     t.string   "username",               limit: 255
     t.string   "college",                limit: 255
-    t.string   "avatar",                 limit: 255
-    t.boolean  "admin"
     t.datetime "date_of_birth"
     t.boolean  "is_female",                          default: false
-
+    t.string   "avatar",                 limit: 255
+    t.boolean  "admin"
+    t.float    "net_worth",              limit: 24
+    t.float    "balance",                limit: 24
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
