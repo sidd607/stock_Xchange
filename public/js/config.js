@@ -1,8 +1,9 @@
 stockXchange
-    .config(function ($stateProvider, $urlRouterProvider){
+    .config(function ($stateProvider, $urlRouterProvider, AuthProvider){
         $urlRouterProvider.otherwise("/home");
-
-
+        // AuthProvider.loginPath('/users/sign_in.json');
+        // AuthProvider.loginMethod('GET');
+        // AuthProvider.resourceName('user');
         $stateProvider
 
             //------------------------------

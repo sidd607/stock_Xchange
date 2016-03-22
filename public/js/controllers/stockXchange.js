@@ -1,5 +1,5 @@
 stockXchange
-  .controller('nseStocks', function($scope, NSEStock) {
+  .controller('nseStocks', function($scope, NSEStock,Auth) {
     $scope.stocks = [];
     $scope.type = ".NS"
     NSEStock.listPromise.then(function(newList) {
@@ -12,10 +12,25 @@ stockXchange
           // Ignored.
       });
     });
+    var credentials = {
+        email: 'user@name.com',
+        password: 'password'
+    };
+    var config = {
+        headers: {
+            'X-HTTP-Method-Override': 'POST'
+        }
+    };
+
+    Auth.login(credentials, config).then(function(user) {
+        console.log(user); // => {id: 1, ect: '...'}
+    }, function(error) {
+        // Authentication failed...
+    });
   })
   .controller('nasdaqStocks', function($scope, NASDAQStock) {
     $scope.stocks = [];
-    $scope.type = ".NS"
+    $scope.type = ""
     NASDAQStock.listPromise.then(function(newList) {
       $scope.stocks = newList;
     });
