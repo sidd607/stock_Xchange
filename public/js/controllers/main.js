@@ -3,10 +3,27 @@ stockXchange
     // Base controller for common functions
     // =========================================================================
 
-    .controller('materialadminCtrl', function($timeout, $state, $scope, growlService){
+    .controller('materialadminCtrl', function($timeout, $state, $scope, growlService, Auth){
         //Welcome Message
         growlService.growl('Welcome back Mallinda!', 'inverse')
+        var credentials = {
+            email: 'user@name.com',
+            password: 'password'
+        };
+        var config = {
+            headers: {
+                'X-HTTP-Method-Override': 'POST'
+            }
+        };
 
+        Auth.login(credentials, config).then(function(user) {
+            console.log(user); // => {id: 1, ect: '...'}
+            $scope.user = user;
+            growlService.growl('Welcome back Naah!', 'inverse')
+        }, function(error) {
+          growlService.growl('Welcome back haan!', 'inverse')
+            // Authentication failed...
+        });
 
         // Detact Mobile Browser
         if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
