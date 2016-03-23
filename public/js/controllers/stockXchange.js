@@ -1,5 +1,15 @@
 stockXchange
-  .controller('nseStocks', function($scope, NSEStock) {
+  .controller('nseStocks', function($scope, NSEStock,Auth) {
+    $scope.master = {};
+    $scope.formData = {};
+     $scope.copyForm = function(formData, stock_id) {
+       $scope.master = angular.copy(formData);
+       $scope.master.stock_id = stock_id;
+     };
+
+     $scope.fillForm = function() {
+       $scope.formData = angular.copy($scope.master);
+     };
     $scope.stocks = [];
     $scope.type = ".NS"
     NSEStock.listPromise.then(function(newList) {
@@ -12,10 +22,25 @@ stockXchange
           // Ignored.
       });
     });
+    var credentials = {
+        email: 'user@name.com',
+        password: 'password'
+    };
+    var config = {
+        headers: {
+            'X-HTTP-Method-Override': 'POST'
+        }
+    };
+
+    Auth.login(credentials, config).then(function(user) {
+        console.log(user); // => {id: 1, ect: '...'}
+    }, function(error) {
+        // Authentication failed...
+    });
   })
   .controller('nasdaqStocks', function($scope, NASDAQStock) {
     $scope.stocks = [];
-    $scope.type = ".NS"
+    $scope.type = ""
     NASDAQStock.listPromise.then(function(newList) {
       $scope.stocks = newList;
     });
@@ -31,7 +56,7 @@ stockXchange
     // $scope will allow this to pass between controller and view
     $scope.formData = {};
     // process the form
-    $scope.processForm = function() {
+    $scope.submit = function() {
       $http.post({
             url     : 'process.php',
             data    : $.param($scope.formData),  // pass in data as strings

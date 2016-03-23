@@ -6,5 +6,5 @@ var stockXchange = angular.module('stockXchange', [
     'angular-loading-bar',
     'oc.lazyLoad',
     'nouislider',
-    'ngTable',
+    'ngTable', 'Devise'
 ])
