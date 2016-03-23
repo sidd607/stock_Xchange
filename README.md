@@ -26,7 +26,8 @@ git remote add upstream https://github.com/zense/stockXchange
 ```
 That's it. Now you have basic setup ready to contribute.
 
-`### For using the UI
+### For using the UI
+
 1. Install bower
 ```sh
 cd public/vendors
