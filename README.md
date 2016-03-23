@@ -26,6 +26,14 @@ git remote add upstream https://github.com/zense/stockXchange
 ```
 That's it. Now you have basic setup ready to contribute.
 
+`### For using the UI
+1. Install bower
+```sh
+cd public/vendors
+bower install
+```
+This will setup the front-end dependencies like bootstrap, angular etc.
+
 ## Fixing some common merge conflicts
 
 If you are getting merge conflict in files like "schema.rb" or "Gemfile.lock" then this will work :
