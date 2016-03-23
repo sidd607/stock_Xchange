@@ -68,16 +68,18 @@
               </div>
             </div>
             <hr>
-            <form class="row" role="form" ng-controller="buyStocks">
+            <form class="row" role="form" ng-submit="submit()">
               <div class="col-sm-8">
                   <div class="form-group fg-line">
                       <label class="sr-only" for="stock_count">Stocks</label>
-                      <input class="form-control input-block" ng-model="formData.stock_count" id="stock_count" name="stock_count" placeholder="How many?" type="number">
+                      <input class="form-control input-block" ng-change="copyForm(formData, {{stock.stock_id}})"
+                      ng-model="formData.stock_count" id="stock_count" name="stock_count" placeholder="How many?"
+                      type="number" value="{{ master.stock_id == stock.stock_id ? master.stock_count : ''}}">
                   </div>
               </div>
-              <input class="form-control input-block" ng-model="formData.stock_id" id="stock_id" name="stock_id" value="{{stock.stock_id}}" type="hidden">
+              <input class="form-control input-block" ng-model="formData.stock_id" id="stock_id" name="stock_id" value="{{stock.stock_id}}" type="number" ng-show="false">
               <div class="col-sm-4">
-                  <button ng-submit="processForm()" class="btn btn-primary btn-block m-t-5 waves-effect">Buy</button>
+                  <button class="btn btn-primary btn-block m-t-5 waves-effect" id="submit">Buy</button>
               </div>
           </form>
         </div>
