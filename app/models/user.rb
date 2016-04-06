@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
      has_many :portfolios
 has_many :posts, dependent: :destroy
 
-  # Add the following methods
+  # Omniauth Code Starts Here
+
   def apply_omniauth(omniauth)
     authorizations.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
@@ -110,6 +111,112 @@ has_many :posts, dependent: :destroy
       authorization.save
     end
     authorization.user
+  end
+
+  # Omniauth Code Ends Here
+
+  # buy
+  # Args: stock_id -> integer
+  #       number_of_stocks -> integer
+  # Returns: true -> If buy successful
+  #          error : String -> If buy failed
+  def buy(stock_id, number_of_stocks)
+    error = ""
+    stock = Stock.find(stock_id)
+    # Params filter
+    # Check stock exists or not
+    # errors.add(:base )
+    #stock = Stock.fin(stock_id)
+    if stock.nil?
+      error = "Stock doesn't exist"
+      errors.add(:base, error)
+      return error
+    end
+
+    validate_count = validate_stock_count(number_of_stocks)
+    if(validate_count!=true)
+      error = validate_count
+      errors.add(:base, validate_count)
+      return error
+    end
+
+    if User.netbalance >= stock.current_price*number_of_stocks
+      error = "Insufficient balance"
+      errors.add(:base, error)
+      return error
+    end
+
+    User.transaction do
+      User.netbalance -= stock.current_price*number_of_stocks
+      User.save!
+      #Portfolio.transaction(requires_new: true) do
+      Portfolio.new(user_id: User.id, stock_id: stock_id, stock_value: stock.current_price, stock_count: number_of_stocks)
+      #raise ActiveRecord::Rollback
+      Portfolio.save!
+      return true
+    end
+  end
+
+  # sell
+  # Args: stock_id -> integer
+  #       number_of_stocks -> integer
+  # Returns: true -> If sell successful
+  #          error : String -> If sell failed
+  def sell(stock_id, number_of_stocks)
+    error = ""
+
+    stock = Stock.find(stock_id)
+    portfolio = Portfolio.find(stock_id)
+
+    validate_count = validate_stock_count(number_of_stocks)
+    if(validate_count!=true)
+      error = validate_count
+      errors.add(:base, validate_count)
+      return error
+    end
+
+    if stock.nil? && portfolio.find(stock_id) == stock_id
+      error = "Stocks doesn't exist"
+      errors.add(:base, error)
+      return error
+    end
+
+    if portfolio.stock_count <= number_of_stocks
+      error = "Less stocks"
+      errors.add(:base, error)
+      return error
+    end
+
+    User.transaction do
+      User.netbalance += stock.current_price*number_of_stocks
+      User.save!
+      #Portfolio.transaction do
+      #if @portfolios.find(stock_id) == stock_id && @portfolios.stock_count >= number_of_stocks
+      #User.save!
+      #updated_stock_count = @portfolios.stock_count -= number_of_stocks
+      portfolio.update(stock_count: portfolio.stock_count -= number_of_stocks)
+      Portfolio.save!
+      return true
+    end
+    #raise ActiveRecord::Rollback
+    #Portfolio.save!
+    #end
+  end
+
+  def validate_stock_count(stock_count)
+    # validates stock count provided as argument
+    if !number_of_stocks.is_a?(Integer)
+      error = "Only Integer values permitted"
+      errors.add(:base, error)
+      return error
+    end
+    if number_of_stocks <= 0
+      error = "Value should be greater than 0"
+      errors.add(:base, error)
+      return error
+    end
+
+    return true
   end
 end
 
