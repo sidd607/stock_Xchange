@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="block-header">
+    <h2>Generic Class Reference <small>Following are the custom generic classes available with the template and can be used alongside with any elements. To modify or delete, please refer 'generic.less'</small></h2>
+
+    <ul class="actions">
+        <li>
+            <a href="">
+                <i class="zmdi zmdi-trending-up"></i>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <i class="zmdi zmdi-check-all"></i>
+            </a>
+        </li>
+        <li class="dropdown" uib-dropdown="">
+            <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" href="" uib-dropdown-toggle="">
+                <i class="zmdi zmdi-more-vert"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                    <a href="">Refresh</a>
+                </li>
+                <li>
+                    <a href="">Manage Widgets</a>
+                </li>
+                <li>
+                    <a href="">Widgets Settings</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+  <div class="row">
+  <div class="col-sm-4" ng-repeat="stock in stocks">
+      <div class="card">
+          <div class="card-header">
+              <h3 class="c-blue">{{stock.stock_name}} <small>{{stock.stock_code}}</small></h3>
+              <!-- <h2 class="pull-right">{{stock.stock_current}}</h2> -->
+          </div>
+
+          <div class="card-body card-padding text-center">
+            <div class="row">
+              <div class="col-md-6">
+                <strong>Current</strong>
+                <h3> {{stock.stock_current}}</h3>
+              </div>
+              <div class="col-md-6">
+                <strong>Day Open</strong>
+                <h3>{{stock.stock_open}}</h3>
+              </div>
+            </div>
+            <hr>
+            <!-- <h3><small>Current:</small> {{stock.stock_current}}</h3>
+            <h3><small>Day Open:</small> {{stock.stock_current}}</h3> -->
+            <!-- <img src="http://chart.finance.yahoo.com/t?s={{stock.stock_code}}{{type}}&lang=en-US&region=US&width=300&height=180" width="100%"/> -->
+            <img src="https://www.google.com/finance/chart?cht=c&q=NSE:{{stock.stock_code}}"/>
+            <hr>
+            <div class="row">
+              <div class="col-md-6">
+                <strong>Day High</strong>
+                <h3>{{stock.stock_day_high}}</h3>
+              </div>
+              <div class="col-md-6">
+                <strong>Day Low</strong>
+                <h3>{{stock.stock_day_low}}</h3>
+              </div>
+            </div>
+            <hr>
+            <form class="row" role="form" ng-submit="submit()">
+              <div class="col-sm-8">
+                  <div class="form-group fg-line">
+                      <label class="sr-only" for="stock_count">Stocks</label>
+                      <input class="form-control input-block" ng-change="copyForm(formData, {{stock.stock_id}})"
+                      ng-model="formData.stock_count" id="stock_count" name="stock_count" placeholder="How many?"
+                      type="number" value="{{ master.stock_id == stock.stock_id ? master.stock_count : ''}}">
+                  </div>
+              </div>
+              <input class="form-control input-block" ng-model="formData.stock_id" id="stock_id" name="stock_id" value="{{stock.stock_id}}" type="number" ng-show="false">
+              <div class="col-sm-4">
+                  <button class="btn btn-primary btn-block m-t-5 waves-effect" id="submit">Buy</button>
+              </div>
+          </form>
+        </div>
+      </div>
+  </div>
+</div>
+</div>

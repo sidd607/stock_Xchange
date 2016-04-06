@@ -26,6 +26,15 @@ git remote add upstream https://github.com/zense/stockXchange
 ```
 That's it. Now you have basic setup ready to contribute.
 
+### For using the UI
+
+1. Install bower
+```sh
+cd public/vendors
+bower install
+```
+This will setup the front-end dependencies like bootstrap, angular etc.
+
 ## Fixing some common merge conflicts
 
 If you are getting merge conflict in files like "schema.rb" or "Gemfile.lock" then this will work :
@@ -38,3 +47,20 @@ rake db:migrate
 git checkout HEAD Gemfile.lock
 bundle install
 ```
+## Fixing Active Admin error
+
+If you are getting "Uninitialized Constant ActiveAdmin (Name error)" then this will probably work :
+
+```sh
+gem 'activeadmin', github: 'activeadmin' # Add to GemFile
+bundle install
+rails g active_admin:install --skip-users # Will add Active Admin with existing users
+rake db:migrate
+```
+But it is better to remove activeadmin for now, because it can be added at the very end. To remove active admin :
+
+```sh
+rails destroy active_admin:install
+rails destroy active_admin:resource specific_table_name # type this command if you put some other migration to active admin
+```
+
