@@ -1,7 +1,8 @@
 stockXchange
     .config(function ($stateProvider, $urlRouterProvider, AuthProvider){
         $urlRouterProvider.otherwise("/home");
-        // AuthProvider.loginPath('/users/sign_in.json');
+        AuthProvider.loginPath('/users/sign_in.json');
+        // $httpProvider.interceptors.unshift('csrfInterceptor');
         // AuthProvider.loginMethod('GET');
         // AuthProvider.resourceName('user');
         $stateProvider
@@ -35,6 +36,12 @@ stockXchange
                         ])
                     }
                 }
+            })
+
+            .state('login', {
+                url: '/login',
+                templateUrl: 'views/login.html',
+                controller: 'loginCtrl'
             })
 
             .state ('stocks', {

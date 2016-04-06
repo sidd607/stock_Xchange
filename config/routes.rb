@@ -11,10 +11,17 @@ Rails.application.routes.draw do
   get 'profile' => 'profile#index'
   resources :comments
   resources :posts
-   devise_for :users, :controllers => {:registrations => 'registrations', :omniauth_callbacks =>  "callbacks"}
-   root 'static_pages#home'
-    get '*path' => 'static_pages#home'
-  
+   devise_for :users, :controllers => {:registrations => 'registrations', :omniauth_callbacks =>  "callbacks", :sessions => 'devise/sessions'}
+  # :skip => [:sessions]
+  # as :user do
+  #   get 'signin' => 'devise/sessions#new', :as => :new_user_session
+  #   post 'signin' => 'devise/sessions#create', :as => :user_session
+  #   get 'signout' => 'devise/sessions#destroy', :as => :destroy_user_session
+  #   get 'signup' => 'registrations#new', :as => :new_registration_session,
+  #     :via => Devise.mappings[:user].sign_out_via
+  # end
+      
+   
   resources :authorizations
   get "/authorizations", to: "authorizations#index", as: "index"
   get "/posts", to: "posts#index", as: "blog"
