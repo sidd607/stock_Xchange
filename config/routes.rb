@@ -3,25 +3,13 @@ Rails.application.routes.draw do
   #     patch 'sell' => 'portfolios#sell_post', on: :member
   # end
   resources :transactions
-   get 'stocks/new_stock'
-
   #resources :stocks
   #get "stocks" => 'stocks#show_info'
   resources :stocks
   get 'profile' => 'profile#index'
   resources :comments
   resources :posts
-   devise_for :users, :controllers => {:registrations => 'registrations', :omniauth_callbacks =>  "callbacks", :sessions => 'devise/sessions'}
-  # :skip => [:sessions]
-  # as :user do
-  #   get 'signin' => 'devise/sessions#new', :as => :new_user_session
-  #   post 'signin' => 'devise/sessions#create', :as => :user_session
-  #   get 'signout' => 'devise/sessions#destroy', :as => :destroy_user_session
-  #   get 'signup' => 'registrations#new', :as => :new_registration_session,
-  #     :via => Devise.mappings[:user].sign_out_via
-  # end
-      
-   
+   devise_for :users, :controllers => {:registrations => 'registrations', :omniauth_callbacks =>  "callbacks"}
   resources :authorizations
   get "/authorizations", to: "authorizations#index", as: "index"
   get "/posts", to: "posts#index", as: "blog"

@@ -1,6 +1,5 @@
 class CallbacksController < Devise::OmniauthCallbacksController
   skip_before_filter :authenticate_user!
-
   def all
     omniauth = request.env["omniauth.auth"]
     authorization = Authorization.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])

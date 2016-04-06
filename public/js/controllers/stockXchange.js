@@ -77,6 +77,7 @@ stockXchange
             });
     };
   })
+<<<<<<< HEAD
   .controller('loginCtrl', function($scope, $state, Auth){
     // $scope will allow this to pass between controller and view
     $scope.formData = {};
@@ -97,3 +98,5 @@ stockXchange
       });
     };
   })
+=======
+>>>>>>> d053abac2cd4fc6c6d82e3ada0a7360e82a22b9c

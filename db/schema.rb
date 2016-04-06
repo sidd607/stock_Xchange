@@ -97,10 +97,7 @@ ActiveRecord::Schema.define(version: 20160310195206) do
     t.text     "content",    limit: 65535
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
-<<<<<<< HEAD
     t.integer  "user_id",    limit: 4
-=======
->>>>>>> removed active-admin files
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
