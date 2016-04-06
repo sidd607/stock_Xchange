@@ -331,3 +331,28 @@ stockXchange
         poll();
         return myservice;
     })
+<<<<<<< HEAD
+    // .factory('csrfInterceptor', [
+    //   '$q', '$injector', function($q, $injector) {
+    //     return {
+    //       responseError: function(rejection) {
+    //         var $http, deferred, errorCallback, successCallback;
+    //         if (rejection.status === 422 && rejection.data === 'Invalid authenticity token') {
+    //           deferred = $q.defer();
+    //           successCallback = function(resp) {
+    //             return deferred.resolve(resp);
+    //           };
+    //           errorCallback = function(resp) {
+    //             return deferred.reject(resp);
+    //           };
+    //           $http = $http || $injector.get('$http');
+    //           $http(rejection.config).then(successCallback, errorCallback);
+    //           return deferred.promise;
+    //         }
+    //         return $q.reject(rejection);
+    //       }
+    //     };
+    //   }
+    // ]);
+=======
+>>>>>>> d053abac2cd4fc6c6d82e3ada0a7360e82a22b9c

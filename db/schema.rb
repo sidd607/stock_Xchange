@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211220758) do
+ActiveRecord::Schema.define(version: 20160310195206) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -66,9 +66,30 @@ ActiveRecord::Schema.define(version: 20160211220758) do
     t.integer  "post_id",    limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "user_id",    limit: 4
   end
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "microposts", force: :cascade do |t|
+    t.text     "content",    limit: 65535
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at", using: :btree
+  add_index "microposts", ["user_id"], name: "index_microposts_on_user_id", using: :btree
+
+  create_table "portfolios", force: :cascade do |t|
+    t.integer  "stock_id",    limit: 4
+    t.integer  "stock_value", limit: 4
+    t.integer  "stock_count", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "user_id",     limit: 4
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -76,7 +97,10 @@ ActiveRecord::Schema.define(version: 20160211220758) do
     t.text     "content",    limit: 65535
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "user_id",    limit: 4
   end
+
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "stocks", force: :cascade do |t|
     t.string   "code",          limit: 2,              null: false
@@ -143,4 +167,7 @@ ActiveRecord::Schema.define(version: 20160211220758) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
+  add_foreign_key "microposts", "users"
+  add_foreign_key "posts", "users"
 end

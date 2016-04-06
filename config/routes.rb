@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   #     patch 'sell' => 'portfolios#sell_post', on: :member
   # end
   resources :transactions
-  get 'stocks/new_stock'
   #resources :stocks
   #get "stocks" => 'stocks#show_info'
   resources :stocks
@@ -11,12 +10,11 @@ Rails.application.routes.draw do
   resources :comments
   resources :posts
    devise_for :users, :controllers => {:registrations => 'registrations', :omniauth_callbacks =>  "callbacks"}
-  root to: 'static_pages#home'
   resources :authorizations
   get "/authorizations", to: "authorizations#index", as: "index"
   get "/posts", to: "posts#index", as: "blog"
   get "/admin", to: "admin/dashboard#index", as: "admin"
-
+  get "main/index"
   devise_scope :user do
       get "social", to: "devise/registrations#social"
   end

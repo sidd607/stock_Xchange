@@ -6,6 +6,15 @@ gem 'rails', '4.2.5'
 # Use sqlite3 as the database for Active Record
 gem 'bootstrap-sass',       '3.2.0.0'
 gem 'mysql2', '>= 0.3.13', '< 0.5'
+gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'jquery-ui-rails', '~> 4.2.1'
+gem 'bower-rails'
+gem 'angularjs-rails'
+gem 'angular-ui-bootstrap-rails' #for bootstrap UI
+gem "font-awesome-rails"
+gem 'bower-rails'
+gem 'angular-rails-templates'
+gem 'sprockets', '2.12.3'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -50,3 +59,5 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+gem 'angular_rails_csrf'
+gem 'angular_csrf'

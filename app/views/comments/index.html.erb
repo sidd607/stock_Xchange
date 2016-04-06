@@ -11,8 +11,8 @@
   </tr>
 
 <% @comments.each do |comment| %>
-  <tr>
-    <td><%= comment.commenter %></td>
+      <tr>
+        <td><%= comment.user.name %></td>
     <td><%= comment.body %></td>
 
     <!-- /posts/:post_id/comments/:id -->

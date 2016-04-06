@@ -77,3 +77,26 @@ stockXchange
             });
     };
   })
+<<<<<<< HEAD
+  .controller('loginCtrl', function($scope, $state, Auth){
+    // $scope will allow this to pass between controller and view
+    $scope.formData = {};
+    // process the form
+    $scope.signIn = function(credentials) {
+      var config = {
+          headers: {
+              'X-HTTP-Method-Override': 'POST'
+          }
+      };
+      console.log(credentials);
+      Auth.login(credentials, config).then(function(user) {
+          console.log(user); // => {id: 1, ect: '...'}
+          $state.go('home');
+      }, function(error) {
+          $state.go('stocks.nse');
+          // Authentication failed...
+      });
+    };
+  })
+=======
+>>>>>>> d053abac2cd4fc6c6d82e3ada0a7360e82a22b9c

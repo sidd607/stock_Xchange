@@ -7,10 +7,11 @@ class User < ActiveRecord::Base
   validates_presence_of :email
 
   has_many :authorizations
-  validates_presence_of :name
-  belongs_to :college
-  has_many :transactions
-  has_many :portfolios
+   #validates_presence_of :name
+     #belongs_to :college
+     has_many :transactions
+     has_many :portfolios
+has_many :posts, dependent: :destroy
 
   # Add the following methods
   def apply_omniauth(omniauth)
