@@ -331,7 +331,7 @@ stockXchange
         poll();
         return myservice;
     })
-<<<<<<< HEAD
+
     // .factory('csrfInterceptor', [
     //   '$q', '$injector', function($q, $injector) {
     //     return {
@@ -354,5 +354,4 @@ stockXchange
     //     };
     //   }
     // ]);
-=======
->>>>>>> d053abac2cd4fc6c6d82e3ada0a7360e82a22b9c
+
