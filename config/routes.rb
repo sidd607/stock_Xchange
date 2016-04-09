@@ -9,19 +9,26 @@ Rails.application.routes.draw do
   get 'profile' => 'profile#index'
   resources :comments
   resources :posts
-   devise_for :users, :controllers => {:registrations => 'registrations', :omniauth_callbacks =>  "callbacks"}
+  devise_for :users, :controllers => {
+    :registrations => 'registrations',
+    :omniauth_callbacks =>  'callbacks'
+  }, :path => '', :path_names => {
+      :sign_in => 'login',
+      :sign_up => 'register'
+  }
+  devise_scope :user do
+    get 'logout' => 'devise/sessions#destroy'
+    get "social", to: "devise/registrations#social"
+  end
   resources :authorizations
   get "/authorizations", to: "authorizations#index", as: "index"
   get "/posts", to: "posts#index", as: "blog"
   get "/admin", to: "admin/dashboard#index", as: "admin"
   get "main/index"
-  devise_scope :user do
-      get "social", to: "devise/registrations#social"
-  end
-  
+
   resources :posts do
-  resources :comments
-end
+    resources :comments
+  end
   get 'static_pages/help'
 
   get 'static_pages/about'

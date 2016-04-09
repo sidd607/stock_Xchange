@@ -12,14 +12,4 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require underscore
 //= require bootstrap
-//= require angular
-//= require angular-route
-//= require angular-animate
-//= require angular-rails-templates
-//= require angular
-//= require ng-app/app
-//= require controllers/main/mainIndexCtrl
-//= require angular-ui-router
-//= require_tree ../templates
