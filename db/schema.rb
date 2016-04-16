@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310195206) do
-
-  create_table "admin_users", force: :cascade do |t|
-  end
+ActiveRecord::Schema.define(version: 20160406183404) do
 
   create_table "authorizations", force: :cascade do |t|
     t.string   "provider",   limit: 255
@@ -53,15 +50,6 @@ ActiveRecord::Schema.define(version: 20160310195206) do
 
   add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at", using: :btree
   add_index "microposts", ["user_id"], name: "index_microposts_on_user_id", using: :btree
-
-  create_table "portfolios", force: :cascade do |t|
-    t.integer  "stock_id",    limit: 4
-    t.integer  "stock_value", limit: 4
-    t.integer  "stock_count", limit: 4
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.integer  "user_id",     limit: 4
-  end
 
   create_table "posts", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -121,18 +109,17 @@ ActiveRecord::Schema.define(version: 20160310195206) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
-    t.string   "provider",               limit: 255
-    t.string   "uid",                    limit: 255
     t.string   "name",                   limit: 255
     t.string   "image",                  limit: 255
-    t.float    "net_worth",              limit: 24
-    t.float    "balance",                limit: 24
     t.string   "username",               limit: 255
-    t.string   "college",                limit: 255
     t.datetime "date_of_birth"
     t.boolean  "is_female",                          default: false
     t.string   "avatar",                 limit: 255
     t.boolean  "admin"
+    t.float    "net_worth",              limit: 24
+    t.float    "balance",                limit: 24
+    t.integer  "rank",                   limit: 4
+    t.integer  "college_id",             limit: 4
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
