@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   #get "stocks" => 'stocks#show_info'
   resources :stocks
   get 'profile' => 'profile#index'
+  get '/stocks/buy/:id/:number' => 'stocks#buy'
   resources :comments
   resources :posts
   devise_for :users, :controllers => {
