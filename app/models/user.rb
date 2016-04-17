@@ -121,6 +121,7 @@ has_many :posts, dependent: :destroy
   # Returns: true -> If buy successful
   #          error : String -> If buy failed
   def buy(stock_id, number_of_stocks)
+
     error = ""
     stock = Stock.find(stock_id)
     # Params filter
@@ -140,19 +141,19 @@ has_many :posts, dependent: :destroy
       return error
     end
 
-    if User.netbalance >= stock.current_price*number_of_stocks
+    if self.balance >= stock.current_price*number_of_stocks
       error = "Insufficient balance"
       errors.add(:base, error)
       return error
     end
 
     User.transaction do
-      User.netbalance -= stock.current_price*number_of_stocks
-      User.save!
+      self.balance -= stock.current_price*number_of_stocks
+      self.save!
       #Portfolio.transaction(requires_new: true) do
-      Portfolio.new(user_id: User.id, stock_id: stock_id, stock_value: stock.current_price, stock_count: number_of_stocks)
+      Userstock.new(user_id: User.id, stock_id: stock_id, stock_value: stock.current_price, stock_count: number_of_stocks)
       #raise ActiveRecord::Rollback
-      Portfolio.save!
+      Userstock.save!
       return true
     end
   end
@@ -188,7 +189,7 @@ has_many :posts, dependent: :destroy
     end
 
     User.transaction do
-      User.netbalance += stock.current_price*number_of_stocks
+      User.balance += stock.current_price*number_of_stocks
       User.save!
       #Portfolio.transaction do
       #if @portfolios.find(stock_id) == stock_id && @portfolios.stock_count >= number_of_stocks
@@ -205,12 +206,12 @@ has_many :posts, dependent: :destroy
 
   def validate_stock_count(stock_count)
     # validates stock count provided as argument
-    if !number_of_stocks.is_a?(Integer)
+    if !stock_count.is_a?(Integer)
       error = "Only Integer values permitted"
       errors.add(:base, error)
       return error
     end
-    if number_of_stocks <= 0
+    if stock_count <= 0
       error = "Value should be greater than 0"
       errors.add(:base, error)
       return error

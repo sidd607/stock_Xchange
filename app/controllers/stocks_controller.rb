@@ -19,35 +19,15 @@ class StocksController < ApplicationController
   end
 
   def buy
-    @stock = Stock.find(params[:id])
-    @me = current_user
-    brokerage = 10 #percent
-    transactionAmmount = params[:number].to_i*(@stock.current_price)
-    transactionAmmount = transactionAmmount + (0.1)*transactionAmmount
-    if transactionAmmount > @me.balance
-      reply = JSON.parse('{"result" : "failed", "error" : "not enough money"}')
-    else 
-      @userStock = UserStock.new
-      @userStock.user_id = @me.id
-      @userStock.stock_id = @stock.id
-      @userStock.stock_value = @stock.current_price
-      @userStock.stock_count = params[:number].to_i
-      if @userStock.save
-        reply = JSON.parse('{"result" : "success"}')
-      else
-        reply = JSON.parse('{"result" : "failed", "error" : "could not save"}')
-      end
-      
-      @me.balance = @me.balance - transactionAmmount
-      puts @me.balance
-      puts transactionAmmount
-      if @me.save
-        reply = JSON.parse('{"result" : "success"}')
-      else
-        reply = JSON.parse('{"result" : failed, "error" : "could not update user balance"}')
-      end
+    stockNumber = params[:stock]["stock_count"]
+    result = current_user.buy(params[:id], stockNumber)
+    if result == true
+      result = '{"result": "successfull"}'
+    else
+      tmp = result
+      result = '{"result" : "failed", "error": "' + tmp + '"}'
     end
-    render :json => reply
+    render :json => JSON.parse(result)
   end
 
   private
