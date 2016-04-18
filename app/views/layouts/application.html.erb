@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <!--[if IE 9 ]><html class="ie9"><![endif]-->
 <%= render 'layouts/header'%>
+<link href="material/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+
 <body>
 <%= render 'layouts/navigationheader'%>
 <section id="main" data-layout="layout-1">
@@ -10,11 +12,7 @@
   <section id="content">
     <div class="container">
       <%= yield %>
-      <%= render 'layouts/actions' %>
-      <%= render 'layouts/charts' %>
-      <%= render 'layouts/maindashboard' %>
-      <%= render 'layouts/recentitems' %>
-          <!-- Todo Lists -->
+              <!-- Todo Lists -->
           <!-- here render todolist if u want -->
 
         </div>
