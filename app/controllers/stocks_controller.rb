@@ -18,6 +18,18 @@ class StocksController < ApplicationController
     @stock = Stock.find(params[:id])
   end
 
+  def buy
+    stockNumber = params[:stock]["stock_count"]
+    result = current_user.buy(params[:id], stockNumber)
+    if result == true
+      result = '{"result": "successfull"}'
+    else
+      tmp = result
+      result = '{"result" : "failed", "error": "' + tmp + '"}'
+    end
+    render :json => JSON.parse(result)
+  end
+
   private
     def stock_params
       params.require(:stock).permit(:code,:name,:stock_type,:current_price,:opening_price,:day_high,:day_low,:sold_count,:created_at,:updated_at)
