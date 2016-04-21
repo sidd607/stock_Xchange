@@ -141,7 +141,7 @@ has_many :posts, dependent: :destroy
       return error
     end
 
-    if self.balance >= stock.current_price*number_of_stocks
+    if self.balance <= stock.current_price*number_of_stocks
       error = "Insufficient balance"
       errors.add(:base, error)
       return error
@@ -151,9 +151,9 @@ has_many :posts, dependent: :destroy
       self.balance -= stock.current_price*number_of_stocks
       self.save!
       #Portfolio.transaction(requires_new: true) do
-      Userstock.new(user_id: User.id, stock_id: stock_id, stock_value: stock.current_price, stock_count: number_of_stocks)
+      userstock = UserStock.new(user_id: self.id, stock_id: stock_id, stock_value: stock.current_price, stock_count: number_of_stocks)
       #raise ActiveRecord::Rollback
-      Userstock.save!
+      userstock.save!
       return true
     end
   end
