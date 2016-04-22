@@ -43,6 +43,10 @@ class StocksController < ApplicationController
   end
 
   def nse
+    @stocks = Stock.where(stock_type: 0)
+  end
+
+  def nasdaq
     @stocks = Stock.where(stock_type: 1)
   end
 
