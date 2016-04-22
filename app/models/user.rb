@@ -7,11 +7,11 @@ class User < ActiveRecord::Base
   validates_presence_of :email
 
   has_many :authorizations
-   #validates_presence_of :name
-     #belongs_to :college
-     has_many :transactions
-     has_many :portfolios
-has_many :posts, dependent: :destroy
+  #validates_presence_of :name
+  #belongs_to :college
+  has_many :transactions
+  has_many :portfolios
+  has_many :posts, dependent: :destroy
 
   # Omniauth Code Starts Here
 
