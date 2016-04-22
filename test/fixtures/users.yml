@@ -4,8 +4,17 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+#one: {}
 # column: value
 #
-two: {}
+#two: {}
 #  column: value
+<% 10.times do |n| %>
+user_<%= n+1 %>:
+  id: <%= "{n+1}"%>
+  name: <%= "user#{n+1}@example.com" %>
+  email: <%= "user#{n+1}@example.com" %>
+  net_worth: 1000000
+  balance: 1000000
+  encrypted_password: <%= Devise.bcrypt(User, 'password') %>
+<% end %>

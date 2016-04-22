@@ -4,8 +4,17 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+#one: {}
 # column: value
 #
-two: {}
+#two: {}
 #  column: value
+<% 10.times do |n| %>
+stock_<%= n+1 %>:
+  id: <%= "{n+1}"%>
+  name: <%= "stock#{n+1}" %>
+  code: <%= "stock#{n+1}" %>
+  stock_type: 1
+  sold_count: 0
+  current_price: <%= ((n+1)*10).to_s %>
+<% end %>
