@@ -1,0 +1,44 @@
+<h2>User Portfolio</h2>
+<div class="row">
+<% @stocks.each do |stocks| %>
+  <div class="col-sm-4 col-md-4">
+      <div class="card">
+          <div class="card-header">
+              <h3 class="c-blue"><%= stocks.stock.name %><small><%= stocks.stock.code %></small></h3>
+              <!-- <h2 class="pull-right">{{stock.stock_current}}</h2> -->
+          </div>
+
+          <div class="card-body card-padding text-center">
+            <div class="row">
+              <div class="col-md-6">
+                <strong>Current</strong>
+                <h3><%= stocks.stock.current_price %></h3>
+              </div>
+              <div class="col-md-6">
+                <strong> Day Open</strong>
+                <h3><%= stocks.stock.opening_price %></h3>
+              </div>
+            </div>
+            <hr>
+            <!-- <h3><small>Current:</small> {{stock.stock_current}}</h3>
+            <h3><small>Day Open:</small> {{stock.stock_current}}</h3> -->
+            <!-- <img src="http://chart.finance.yahoo.com/t?s={{stock.stock_code}}{{type}}&lang=en-US&region=US&width=300&height=180" width="100%"/> -->
+            <!--<img src="https://www.google.com/finance/chart?cht=c&q=NSE:<%=stocks.stock.code%>"/>-->
+            <hr>
+            <div class="row">
+              <div class="col-md-6">
+                <strong>Day High</strong>
+                <h3><%= stocks.stock.day_high %></h3>
+              </div>
+              <div class="col-md-6">
+                <strong>Day Low</strong>
+                <h3><%= stocks.stock.day_low %></h3>
+              </div>
+            </div>
+            <hr>
+            
+        </div>
+      </div>
+  </div>
+  <% end %>
+</div>
