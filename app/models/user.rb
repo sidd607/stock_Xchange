@@ -146,7 +146,6 @@ class User < ActiveRecord::Base
       errors.add(:base, error)
       return error
     end
-
     User.transaction do
       self.balance -= stock.current_price*number_of_stocks
       self.save!
@@ -187,7 +186,7 @@ class User < ActiveRecord::Base
       errors.add(:base, error)
       return error
     end
-
+    
     User.transaction do
       User.balance += stock.current_price*number_of_stocks
       User.save!

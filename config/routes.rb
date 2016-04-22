@@ -5,10 +5,19 @@ Rails.application.routes.draw do
   resources :transactions
   get 'dashboard' => 'dashboard#index'
   #get "stocks" => 'stocks#show_info'
-  resources :stocks, defaults: {format: 'json'}
+  resources :stocks do
+    get 'nse', on: :collection
+  end
+  
   resources :stocks do
     member do
       post 'buy' 
+    end
+  end
+
+  resources :user_stocks, defaults: {format: 'json'} do
+    member do
+      post 'sell'
     end
   end
 
